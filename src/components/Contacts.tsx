@@ -18,5 +18,15 @@ type noContacts = {
 }
 type ContactList = Contact[] | noContacts[]
 export default function Contacts(props) {
-  return <article></article>
+  const [contacts, setContacts] = useState<ContactList>([])
+
+  return (
+    <article>
+      <article className="contacts__add">
+        <h1 className="contacts__title">Contacts</h1>
+        <Add className="contacts__add-icon" />
+      </article>
+      {listContacts(contacts)}
+    </article>
+  )
 }
