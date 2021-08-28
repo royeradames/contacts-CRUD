@@ -24,6 +24,11 @@ export default function Form(props) {
 
   const [emailList, setEmailList] = useState(emails)
 
+  /* update the email list when the contact changes */
+  useEffect(() => {
+    setEmailList(emails)
+  }, [emails])
+
   /* Remove email form email list */
   const removeListedEmail = (index: number) => {
     // make a copy of email
