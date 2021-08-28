@@ -24,6 +24,16 @@ export default function Form(props) {
 
   const [emailList, setEmailList] = useState(emails)
 
+  /* Remove email form email list */
+  const removeListedEmail = (index: number) => {
+    // make a copy of email
+    const updateEmailList = [...emailList]
+    // remove the email
+    updateEmailList.splice(index, 1)
+    // set the new email list
+    setEmailList(updateEmailList)
+  }
+
   /*  
     - list the user emails
     - have icon next to email so when it's click it send request to delete that user email.
