@@ -13,6 +13,10 @@ export default function Home() {
   return (
     <main>
       <SEO title="AVB Contacts" />
+      <Contacts
+        setSelectedContact={setSelectedContact}
+        setShowContactDetail={setShowContactDetail}
+      />
     </main>
   )
 }
