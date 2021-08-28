@@ -20,6 +20,22 @@ type ContactList = Contact[] | noContacts[]
 export default function Contacts(props) {
   const [contacts, setContacts] = useState<ContactList>([])
 
+  /* assemple the contact names */
+  const listContacts = (contacts: ContactList) => {
+    /* list all names */
+    return contacts.map((aContact: Contact | noContacts, index: number) => {
+      return (
+        <p
+          key={index}
+          className="contacts__name"
+          onClick={() => {
+            // show clicked contact
+            props.setSelectedContact(aContact)
+          }}
+        >{`${aContact?.firstName} ${aContact?.lastName}`}</p>
+      )
+    })
+  }
   return (
     <article>
       <article className="contacts__add">
