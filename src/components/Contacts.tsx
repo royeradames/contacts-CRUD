@@ -20,6 +20,25 @@ type ContactList = Contact[] | noContacts[]
 export default function Contacts(props) {
   const [contacts, setContacts] = useState<ContactList>([])
 
+  /* get the list of names when page first loads */
+  useEffect(() => {
+    axios
+      .get("https://avb-contacts-api.herokuapp.com/contacts/paginated")
+      .then(response => {
+        setContacts(response.data.contacts)
+
+        // on page load default to show the first contact
+        const firstContact = response.data.contacts[0]
+        props.setSelectedContact(response.data.contacts[0])
+
+        // show the form page
+        props.setShowContactDetail(true)
+      })
+      .catch(error => {
+        setContacts([{ firstName: "No", lastName: "contacts" }])
+      })
+  }, [])
+
   /* assemple the contact names */
   const listContacts = (contacts: ContactList) => {
     /* list all names */
