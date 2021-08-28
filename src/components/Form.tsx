@@ -24,6 +24,24 @@ export default function Form(props) {
 
   const [emailList, setEmailList] = useState(emails)
 
+  /*  
+    - list the user emails
+    - have icon next to email so when it's click it send request to delete that user email.
+  */
+  const unpackgeEmails = () => {
+    return emailList.map((aEmail: string | null, index: number) => {
+      return (
+        <article className="form__delete-aEmail" key={index}>
+          <p className="form__aEmail">{aEmail}</p>
+          <Substract
+            onClick={() => {
+              removeListedEmail(index)
+            }}
+          />
+        </article>
+      )
+    })
+  }
   return (
     <div>
       Form
