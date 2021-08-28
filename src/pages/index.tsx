@@ -10,5 +10,9 @@ export default function Home() {
   const [selectedContact, setSelectedContact] = useState(false)
   const [showContactDetail, setShowContactDetail] = useState(false)
 
-  return <main></main>
+  return (
+    <main>
+      <SEO title="AVB Contacts" />
+    </main>
+  )
 }
