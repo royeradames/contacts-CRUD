@@ -1,0 +1,42 @@
+/* import font family */
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* reset css */
+@import-normalize;
+@import "reset-css";
+
+/* 
+    border size fix and
+    set 1rem = 10px
+*/
+html{
+    font-family: 'Lato', sans-serif;
+    font-size:  10px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+*, *::before, *::after{
+    font-family: inherit;
+    font-size: inherit;
+    box-sizing: inherit;
+
+    /* variables */
+    // colors
+    // primary
+    --white-500: #F8FAFF;
+    --white-400: #FFFFFF;
+    --blue: #579AFF;
+    --text: #444444;
+    --title: #000000;
+}
+
+/* don't allow images to overflow */
+img{
+    max-width: 100%;
+}
+
+/* remove text decoration on all links */
+a{
+    text-decoration: none;
+}
