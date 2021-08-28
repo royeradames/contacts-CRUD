@@ -20,5 +20,9 @@ type Error = {
   error: string
 }
 export default function Form(props) {
+  const { id, firstName, lastName, emails }: Contact = props.selectedContact
+
+  const [emailList, setEmailList] = useState(emails)
+
   return <div>Form</div>
 }
