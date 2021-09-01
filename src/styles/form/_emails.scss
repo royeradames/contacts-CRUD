@@ -68,6 +68,9 @@
         /* add space between icon and text */
         column-gap: 1.4rem;
 
+        /* add space between error and others */
+        row-gap: 1rem;
+
 
         &-text-field{
             /* set elements to define grid area */
