@@ -57,6 +57,14 @@
         
         /* move buttons to the left */
         flex-direction: row-reverse;
+        
+        &-save{
+            /* remove bolder */
+            border: none;
+        }
+
+        
+        
     }
     
 }
