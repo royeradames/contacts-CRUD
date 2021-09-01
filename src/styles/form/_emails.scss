@@ -75,6 +75,11 @@
         &-text-field{
             /* set elements to define grid area */
             grid-area: text-field;
+
+            /* remove bolder */
+            border: none;
+
+            
         }
         &-icon{
             /* set elements to define grid area */
