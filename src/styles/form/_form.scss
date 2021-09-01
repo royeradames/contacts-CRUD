@@ -50,6 +50,10 @@
     &__cancel-save{
         /* place elements in grid area */
         grid-area: cancel-save;
+        
+        /* add space between buttons */
+        display: flex;
+        column-gap: 3rem;
     }
     
 }
