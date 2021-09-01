@@ -74,7 +74,11 @@
             /* let user know they can click on button */
             cursor: pointer;
 
-            
+            /* inverser the colors */
+            &:hover{
+                background-color: var(--white-400);
+                color: var(--blue-400);
+            }
         }
 
         
