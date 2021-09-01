@@ -54,6 +54,9 @@
         /* add space between buttons */
         display: flex;
         column-gap: 3rem;
+        
+        /* move buttons to the left */
+        flex-direction: row-reverse;
     }
     
 }
