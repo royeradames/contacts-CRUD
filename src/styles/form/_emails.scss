@@ -13,5 +13,27 @@
         / 1fr
     ;
 
+    /* add elements to area */
+    &__label{
+        grid-area: label;
+    }
+
    
+    &__new-email-inputs{
+        grid-area: new-emails;
+    }
+
+    &__list{
+        /* move to email area */
+        grid-area: list;
+
+        
+    }
+
+    
+    &__add-email{
+        /* add add-email option to email layout */
+        grid-area: add;
+
+    }
 }
