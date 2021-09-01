@@ -18,5 +18,10 @@
     /* add white space around */
     padding: 7.7rem 3rem 2.2rem;
     
-    
+    /* define text for labels */
+    &__input{
+        // add spacing between label and field
+        display: grid;
+        row-gap: .7rem;
+    }
 }
