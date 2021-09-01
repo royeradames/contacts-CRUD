@@ -38,7 +38,10 @@
             /* add space between emails */
             margin-bottom: 1.2rem;
 
-            
+            /* remove white space for last email */
+            &-last{
+                margin: none;
+            }
         }
         
     }
