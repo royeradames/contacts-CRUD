@@ -42,7 +42,11 @@
         color: var(--red);
     }
 
-    
+    /* form buttons */
+    &__delete{
+        /* place elements in grid area */
+        grid-area: delete;
+    }
     
     
 }
