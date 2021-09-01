@@ -1,0 +1,17 @@
+.emails{
+    
+    /* layout */
+    display: grid;
+    grid-template: 
+        "label" max-content
+        "." .9rem
+        "new-emails" max-content
+        "." .9rem
+        "list" max-content
+        "." 1.3rem
+        "add" max-content
+        / 1fr
+    ;
+
+   
+}
