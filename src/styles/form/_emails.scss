@@ -92,7 +92,9 @@
             /* set elements to define grid area */
             grid-area: icon;
 
-           
+            /* remove background */
+            background: none;
+            border: none;
         }
         &-error{
             /* move error to the bottom of text and icon */
