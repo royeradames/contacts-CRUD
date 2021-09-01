@@ -124,5 +124,11 @@
 
         /* define size */
         width: 12rem;
+
+        /* inverser the colors */
+        &:hover{
+            background-color: var(--white-400);
+            color: var(--red);
+        }
     }
 }
