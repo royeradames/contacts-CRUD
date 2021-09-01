@@ -9,7 +9,11 @@
         // let user know that they can click on add
         cursor: pointer;
 
-       
+        // add spacing between icon and title
+        display: flex;
+        column-gap: 2.1rem;
+        justify-items: center;
+
         
         
     }
