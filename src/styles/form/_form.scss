@@ -112,5 +112,11 @@
 
         /* decorations*/
         background-color: var(--red);
+
+        /* define the text */
+        color: var(--white-400);
+        font-weight: 400;
+        font-size: 2rem;
+        padding: .7rem 3rem;
     }
 }
