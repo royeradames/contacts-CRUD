@@ -57,5 +57,31 @@
         /* add add-email option to email layout */
         grid-area: add;
 
+        /* move text and icon side by side */
+        display: grid;
+        grid-template: 
+            "icon text-field " max-content
+            "error error " max-content
+            / max-content 1fr
+        ;
+
+
+        &-text-field{
+            /* set elements to define grid area */
+            grid-area: text-field;
+        }
+        &-icon{
+            /* set elements to define grid area */
+            grid-area: icon;
+
+           
+        }
+        &-error{
+            /* move error to the bottom of text and icon */
+            grid-area: error;
+
+            
+        }
+        
     }
 }
