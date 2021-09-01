@@ -32,7 +32,8 @@
         /* make icon and text adjacent to each other  */
         &-email{
             display: flex;
-            
+            /* add sapce between icon and email text */
+            column-gap: 1.4rem;
             
             
 
