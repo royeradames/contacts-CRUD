@@ -5,6 +5,15 @@
     // set width to max text content
     display: inline-block;
 
+    &__add{
+        // let user know that they can click on add
+        cursor: pointer;
+
+       
+        
+        
+    }
+
     
 
 }
