@@ -1,4 +1,15 @@
 .form{
     /* move form to the right of contact name list */
     grid-area: detail;
+    
+    /* layout */
+    display: grid;
+    grid-template:
+        "first-name last-name" min-content
+        "email ." 1fr
+        "delete cancel-save" min-content
+        / 1fr 1fr
+    ;
+    
+    
 }
