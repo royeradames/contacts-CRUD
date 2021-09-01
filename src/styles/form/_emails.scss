@@ -65,6 +65,9 @@
             / max-content 1fr
         ;
 
+        /* add space between icon and text */
+        column-gap: 1.4rem;
+
 
         &-text-field{
             /* set elements to define grid area */
