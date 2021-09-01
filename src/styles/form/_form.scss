@@ -10,6 +10,10 @@
         "delete cancel-save" min-content
         / 1fr 1fr
     ;
+
+    // add white space between grid areas
+    column-gap: 4rem;
+    row-gap: 2.9rem;
     
     
 }
