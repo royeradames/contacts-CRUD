@@ -23,7 +23,10 @@
             font-weight: 400;
             color: var(--black);
 
-            
+            // add color cue
+            &:hover{
+                color: var(--blue-400);
+            }
         }
     }
 
