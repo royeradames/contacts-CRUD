@@ -47,6 +47,9 @@
         /* place elements in grid area */
         grid-area: delete;
     }
-    
+    &__cancel-save{
+        /* place elements in grid area */
+        grid-area: cancel-save;
+    }
     
 }
