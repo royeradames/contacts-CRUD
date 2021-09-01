@@ -79,7 +79,14 @@
             /* remove bolder */
             border: none;
 
-            
+            /* define text */
+            font-size: 1.8rem;
+            color: var(--blue-400);
+            align-self: center;
+            &::placeholder{
+                font-size: 1.8rem;
+                color: var(--blue-400);
+            }
         }
         &-icon{
             /* set elements to define grid area */
