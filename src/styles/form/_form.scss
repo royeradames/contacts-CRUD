@@ -109,5 +109,8 @@
     &__delete{
         /* remove bolder */
         border: none;
+
+        /* decorations*/
+        background-color: var(--red);
     }
 }
