@@ -84,7 +84,11 @@
             }
         }
 
-        
+        &-cancel{
+            /* decorations*/
+            background-color: var(--blue-200);
+            border: .1rem solid var(--blue-400);
+        }
         
     }
     
