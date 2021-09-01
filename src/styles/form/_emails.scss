@@ -95,6 +95,9 @@
             /* remove background */
             background: none;
             border: none;
+
+            // cue the user that they can click here
+            cursor: pointer;
         }
         &-error{
             /* move error to the bottom of text and icon */
