@@ -103,7 +103,8 @@
             /* move error to the bottom of text and icon */
             grid-area: error;
 
-            
+            /* make error text red */
+            color: var(--red);
         }
         
     }
