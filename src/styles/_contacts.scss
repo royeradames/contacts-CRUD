@@ -17,7 +17,14 @@
         // add space inbetween title
         padding: 1.4rem 1.7rem 2rem;
 
-        
+        // define text color size and color
+        &-title{
+            font-size: 3.6rem;
+            font-weight: 400;
+            color: var(--black);
+
+            
+        }
     }
 
     
