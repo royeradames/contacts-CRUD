@@ -41,6 +41,9 @@ export default function Form(props) {
   /* get incoming data */
   const { id, firstName, lastName, emails }: Contact = props.selectedContact
 
+  /* UI render when email it's change */
+  const [emailList, setEmailList] = useState(emails)
+
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
