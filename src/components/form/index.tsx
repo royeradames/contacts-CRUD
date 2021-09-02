@@ -38,6 +38,8 @@ export default function Form(props) {
     contacts: ContactList
     setContacts: React.Dispatch<React.SetStateAction<ContactList>>
   } = props
+  /* get incoming data */
+  const { id, firstName, lastName, emails }: Contact = props.selectedContact
 
   return (
     <>
