@@ -44,5 +44,23 @@ export default function NewEmail({ setEmailList, emailList }) {
       })
     }
   }
-  return <></>
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} id="new-email"></form>
+      <article className="emails__add-email">
+        <button className="emails__add-email-icon" form="new-email">
+          <Add />
+        </button>
+        <input
+          className="emails__add-email-text-field"
+          placeholder="Add email"
+          {...register("email")}
+          type="email"
+          required={true}
+          form="new-email"
+        />
+        <p className="emails__add-email-error">{error.message}</p>
+      </article>
+    </>
+  )
 }
