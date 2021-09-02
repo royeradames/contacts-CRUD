@@ -18,5 +18,9 @@ export default function NewEmail({ setEmailList, emailList }) {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInputs>()
+
+  const innitError = { type: "", message: "" }
+  const [error, setError] = useState(innitError)
+
   return <></>
 }
