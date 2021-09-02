@@ -23,7 +23,10 @@ export type noContacts = {
 export type ContactList = Contact[] | noContacts[]
 
 export default function Home() {
+  /* detail information of a contact */
   const [selectedContact, setSelectedContact] = useState(false)
+
+  /* toggle for detail panel */
   const [showContactDetail, setShowContactDetail] = useState(false)
 
   return (
