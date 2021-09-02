@@ -142,6 +142,38 @@ export default function Form(props) {
       )
     })
   }
+
+  /* generate text inputs */
+  const inputsName = () => {
+    /* list of inputs */
+    const inputs = [
+      { name: "firstName", class: "first-name" },
+      { name: "lastName", class: "last-name" },
+    ]
+
+    /* template to generate inputs */
+    return inputs.map(
+      (input: { name: string; class: string }, index: number) => {
+        return (
+          <article className={`form__input form__${input.class}`} key={index}>
+            <label className={`form__${input.class} form__label`}>
+              First Name
+            </label>
+            <input
+              form="contact-details"
+              className={`form__text-field form__${input.class}`}
+              {...register(
+                input.name === "firstName" ? "firstName" : "lastName"
+              )}
+              placeholder={input.name === "firstName" ? firstName : lastName}
+            />
+            <p className="form__error">{errors.firstName?.message}</p>
+          </article>
+        )
+      }
+    )
+  }
+
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
