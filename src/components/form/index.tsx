@@ -179,6 +179,30 @@ export default function Form(props) {
     props.setShowContactDetail(false)
   }
 
+  /* create a new user */
+  const create = (
+    firstName: string,
+    lastName: string,
+    email: [] | string[]
+  ) => {
+    axios
+      .post("https://avb-contacts-api.herokuapp.com/contacts", {
+        firstName,
+        lastName,
+        emails: email,
+      })
+      .then(data => {
+        // todo: give the user a cue that their contact has been save
+        console.log(data.data)
+
+        /* add new contact to the contact list */
+        setContacts([...contacts, data.data])
+      })
+      .catch(error => {
+        // todo: give the user a cue that their contact has been failed to save
+        console.log(error)
+      })
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
