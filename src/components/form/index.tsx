@@ -174,6 +174,11 @@ export default function Form(props) {
     )
   }
 
+  /* handle the closing of the detail panel */
+  const closeDetailPanel = () => {
+    props.setShowContactDetail(false)
+  }
+
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
