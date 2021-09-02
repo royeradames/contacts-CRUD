@@ -12,5 +12,11 @@ type IFormInputs = {
 }
 
 export default function NewEmail({ setEmailList, emailList }) {
+  const {
+    setValue,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInputs>()
   return <></>
 }
