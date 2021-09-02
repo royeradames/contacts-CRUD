@@ -6,6 +6,11 @@ import { useForm } from "react-hook-form"
 import Add from "../../assets/plug-sign.svg"
 import { useState } from "react"
 
+/* types */
+type IFormInputs = {
+  email: string
+}
+
 export default function NewEmail({ setEmailList, emailList }) {
   return <></>
 }
