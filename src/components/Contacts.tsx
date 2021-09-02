@@ -6,19 +6,16 @@ import axios from "axios"
 import Add from "../assets/plug-sign.svg"
 
 /* types */
-type Contact = {
-  id: number
-  firstName: string
-  lastName: string
-  email: string[] | []
-}
-type noContacts = {
-  firstName: string
-  lastName: string
-}
-type ContactList = Contact[] | noContacts[]
+import { Contact, noContacts, ContactList } from "../pages/index"
+
 export default function Contacts(props) {
-  const [contacts, setContacts] = useState<ContactList>([])
+  const {
+    contacts,
+    setContacts,
+  }: {
+    contacts: ContactList
+    setContacts: React.Dispatch<React.SetStateAction<ContactList>>
+  } = props
 
   /* get the list of names when page first loads */
   useEffect(() => {
@@ -29,8 +26,7 @@ export default function Contacts(props) {
 
         // on page load default to show the first contact
         const firstContact = response.data.contacts[0]
-        props.setSelectedContact(response.data.contacts[0])
-
+        props.setSelectedContact(firstContact)
         // show the form page
         props.setShowContactDetail(true)
       })
