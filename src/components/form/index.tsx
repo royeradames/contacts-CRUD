@@ -54,6 +54,10 @@ export default function Form(props) {
     resolver: yupResolver(schema),
   })
 
+  /* update the email list when the contact changes */
+  useEffect(() => {
+    setEmailList(emails)
+  }, [emails])
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
