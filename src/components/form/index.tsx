@@ -117,6 +117,31 @@ export default function Form(props) {
     // set the new email list
     setEmailList(updateEmailList)
   }
+
+  /*  
+    - list the user emails
+    - have icon next to email so when it's click it send request to delete that user email.
+  */
+  const unpackgeEmails = () => {
+    return emailList.map((aEmail: string | null | undefined, index: number) => {
+      const lastIndex = index === emailList.length - 1
+      return (
+        <article
+          className={`emails__list-email ${
+            lastIndex ? "emails__list-email-last" : ""
+          }`}
+          key={index}
+        >
+          <p className="emails__list-text">{aEmail}</p>
+          <Substract
+            onClick={() => {
+              removeListedEmail(index)
+            }}
+          />
+        </article>
+      )
+    })
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
