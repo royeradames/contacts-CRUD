@@ -29,14 +29,29 @@ export default function Home() {
   /* toggle for detail panel */
   const [showContactDetail, setShowContactDetail] = useState(false)
 
+  /* list of names of the contact panel */
+  // todo: update name to contactList
+  const [contacts, setContacts] = useState<ContactList>([])
+
   return (
     <main className="layout">
       <SEO title="AVB Contacts" />
       <Contacts
         setSelectedContact={setSelectedContact}
         setShowContactDetail={setShowContactDetail}
+        contacts={contacts}
+        setContacts={setContacts}
       />
-      {showContactDetail ? <Form selectedContact={selectedContact} /> : ""}
+      {showContactDetail ? (
+        <Form
+          selectedContact={selectedContact}
+          setShowContactDetail={setShowContactDetail}
+          contacts={contacts}
+          setContacts={setContacts}
+        />
+      ) : (
+        ""
+      )}
     </main>
   )
 }
