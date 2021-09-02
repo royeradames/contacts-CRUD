@@ -23,6 +23,12 @@ interface IFormInputs {
   emails: string[]
 }
 
+/* schema */
+const schema = yup.object().shape({
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+})
+
 export default function Form(props) {
   return <></>
 }
