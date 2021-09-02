@@ -6,7 +6,7 @@
     display: grid;
     grid-template:
         "first-name last-name" min-content
-        "email ." 1fr
+        "email white-space" 1fr
         "delete cancel-save" min-content
         / 1fr 1fr
     ;
@@ -17,6 +17,12 @@
     
     /* add white space around */
     padding: 7.7rem 3rem 2.2rem;
+
+    /* add a empty div to white space area and let grid place the elements by order on html */
+    &::after{
+        content: "";
+        grid-area: white-space;
+    }
     
     /* define text for labels */
     &__input{
@@ -43,14 +49,8 @@
     }
 
     /* form buttons */
-    &__delete{
-        /* place elements in grid area */
-        grid-area: delete;
-    }
+   
     &__cancel-save{
-        /* place elements in grid area */
-        grid-area: cancel-save;
-        
         /* add space between buttons */
         display: flex;
         column-gap: 3rem;
