@@ -14,6 +14,15 @@ import axios from "axios"
 /* components */
 import NewEmails from "./NewEmails"
 import { create } from "yup/lib/Reference"
+
+/* types */
+import { Contact, ContactList } from "../../pages/index"
+interface IFormInputs {
+  firstName: string
+  lastName: string
+  emails: string[]
+}
+
 export default function Form(props) {
   return <></>
 }
