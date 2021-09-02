@@ -78,7 +78,7 @@ export default function Contacts(props) {
         <h1 className="contacts__add-title">Contacts</h1>
         <Add className="contacts__add-icon" />
       </article>
-      {listContacts(contacts)}
+      <article>{listContacts(contacts)}</article>
     </article>
   )
 }
