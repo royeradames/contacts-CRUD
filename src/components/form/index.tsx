@@ -107,6 +107,16 @@ export default function Form(props) {
         console.log({ error })
       })
   }
+
+  /* Remove email form email list */
+  const removeListedEmail = (index: number) => {
+    // make a copy of email
+    const updateEmailList = [...emailList]
+    // remove the email
+    updateEmailList.splice(index, 1)
+    // set the new email list
+    setEmailList(updateEmailList)
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
