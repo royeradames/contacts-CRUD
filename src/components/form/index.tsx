@@ -30,6 +30,15 @@ const schema = yup.object().shape({
 })
 
 export default function Form(props) {
+  /* list of the contact names */
+  const {
+    contacts,
+    setContacts,
+  }: {
+    contacts: ContactList
+    setContacts: React.Dispatch<React.SetStateAction<ContactList>>
+  } = props
+
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
