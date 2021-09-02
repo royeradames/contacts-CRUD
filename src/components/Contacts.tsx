@@ -39,20 +39,27 @@ export default function Contacts(props) {
   const listContacts = (contacts: ContactList) => {
     /* list all names */
     return contacts.map((aContact: Contact | noContacts, index: number) => {
+      const lastIndex = contacts.length - 1
+      const isLastContact = lastIndex === index
       return (
-        <p
+        <button
           key={index}
-          className="contacts__name"
+          className={`contacts__name ${
+            isLastContact ? "contacts__name-last" : ""
+          }`}
           onClick={() => {
             // show clicked contact
             props.setSelectedContact(aContact)
+
+            /* show detail panel*/
+            props.setShowContactDetail(true)
           }}
-        >{`${aContact?.firstName} ${aContact?.lastName}`}</p>
+        >{`${aContact?.firstName} ${aContact?.lastName}`}</button>
       )
     })
   }
   return (
-    <article>
+    <article className="contacts">
       <article className="contacts__add">
         <h1 className="contacts__title">Contacts</h1>
         <Add className="contacts__add-icon" />
