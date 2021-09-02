@@ -60,8 +60,22 @@ export default function Contacts(props) {
   }
   return (
     <article className="contacts">
-      <article className="contacts__add">
-        <h1 className="contacts__title">Contacts</h1>
+      <article
+        className="contacts__add"
+        /* innit form to create new contact */
+        onClick={() => {
+          // show a empty detail panel
+          props.setSelectedContact({
+            firstName: "",
+            lastName: "",
+            emails: [],
+          })
+
+          // show detail panel
+          props.setShowContactDetail(true)
+        }}
+      >
+        <h1 className="contacts__add-title">Contacts</h1>
         <Add className="contacts__add-icon" />
       </article>
       {listContacts(contacts)}
