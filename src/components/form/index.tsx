@@ -69,6 +69,31 @@ export default function Form(props) {
       ? save(id, data.firstName, data.lastName, emailList)
       : create(data.firstName, data.lastName, emailList)
   }
+
+  /* when emails get delete update the server */
+  const save = (
+    id: string,
+    firstName: string,
+    lastName: string,
+    emails: string[] | []
+  ) => {
+    /* update contact without the delete email */
+    axios
+      .put(`https://avb-contacts-api.herokuapp.com/contacts/${id}`, {
+        id,
+        firstName,
+        lastName,
+        emails,
+      })
+      .then(data => {
+        console.log({ data })
+        setEmailList(data?.data?.email)
+        closeDetailPanel()
+      })
+      .catch(error => {
+        console.log({ error })
+      })
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
