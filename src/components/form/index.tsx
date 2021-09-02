@@ -10,6 +10,10 @@ import * as yup from "yup"
 import Add from "../../assets/plug-sign.svg"
 import Substract from "../../assets/minus-button.svg"
 import axios from "axios"
+
+/* components */
+import NewEmails from "./NewEmails"
+import { create } from "yup/lib/Reference"
 export default function Form(props) {
   return <></>
 }
