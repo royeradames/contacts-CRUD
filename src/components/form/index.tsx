@@ -94,6 +94,19 @@ export default function Form(props) {
         console.log({ error })
       })
   }
+
+  /* delete the contact */
+  const deleteContact = (id: string) => {
+    axios
+      .delete(`https://avb-contacts-api.herokuapp.com/contacts/${id}`)
+      .then(data => {
+        console.log({ data })
+        closeDetailPanel()
+      })
+      .catch(error => {
+        console.log({ error })
+      })
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
