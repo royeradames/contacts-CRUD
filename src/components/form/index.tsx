@@ -44,6 +44,16 @@ export default function Form(props) {
   /* UI render when email it's change */
   const [emailList, setEmailList] = useState(emails)
 
+  /* import form fuctions */
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(schema),
+  })
+
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
