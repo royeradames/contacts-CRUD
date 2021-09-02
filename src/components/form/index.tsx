@@ -58,6 +58,17 @@ export default function Form(props) {
   useEffect(() => {
     setEmailList(emails)
   }, [emails])
+
+  /* when user saves do something. */
+  const onSubmit = (data: IFormInputs) => {
+    console.log(data)
+    /* update the user with the given information
+      or create a new contact
+    */
+    id
+      ? save(id, data.firstName, data.lastName, emailList)
+      : create(data.firstName, data.lastName, emailList)
+  }
   return (
     <>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
