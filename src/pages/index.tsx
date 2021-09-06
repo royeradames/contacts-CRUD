@@ -16,15 +16,18 @@ export type Contact = {
   lastName: string
   emails: string[] | []
 }
-export type noContacts = {
-  firstName: string
-  lastName: string
-}
-export type ContactList = Contact[] | noContacts[]
+
+export type ContactList = Contact[]
 
 export default function Home() {
   /* detail information of a contact */
-  const [selectedContact, setSelectedContact] = useState(false)
+  const innitContact: Contact = {
+    id: "",
+    firstName: "",
+    lastName: "",
+    emails: [],
+  }
+  const [selectedContact, setSelectedContact] = useState(innitContact)
 
   /* toggle for detail panel */
   const [showContactDetail, setShowContactDetail] = useState(false)
@@ -48,6 +51,7 @@ export default function Home() {
           setShowContactDetail={setShowContactDetail}
           contacts={contacts}
           setContacts={setContacts}
+          setSelectedContact={setSelectedContact}
         />
       ) : (
         ""
