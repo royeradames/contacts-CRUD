@@ -1,12 +1,11 @@
 /* libraries */
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import axios from "axios"
-
 /* SVGs */
 import Add from "../assets/plug-sign.svg"
 
 /* types */
-import { Contact, noContacts, ContactList } from "../pages/index"
+import { Contact, ContactList } from "../pages/index"
 
 export default function Contacts(props) {
   const {
@@ -30,15 +29,17 @@ export default function Contacts(props) {
         // show the form page
         props.setShowContactDetail(true)
       })
-      .catch(error => {
-        setContacts([{ firstName: "No", lastName: "contacts" }])
+      .catch(() => {
+        setContacts([
+          { id: "-1", firstName: "No", lastName: "contacts", emails: [] },
+        ])
       })
   }, [])
 
   /* assemple the contact names */
   const listContacts = (contacts: ContactList) => {
     /* list all names */
-    return contacts.map((aContact: Contact | noContacts, index: number) => {
+    return contacts.map((aContact: Contact, index: number) => {
       const lastIndex = contacts.length - 1
       const isLastContact = lastIndex === index
       return (
