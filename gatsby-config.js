@@ -62,5 +62,7 @@ module.exports = {
         icon: "./static/favicon.ico",
       },
     },
+    // allow offline access
+    `gatsby-plugin-offline`,
   ],
 }
