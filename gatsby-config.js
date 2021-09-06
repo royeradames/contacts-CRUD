@@ -51,5 +51,16 @@ module.exports = {
     },
     // allow dynamic changes of page title and description
     `gatsby-plugin-react-helmet`,
+    // allows users to add this site to their home screen on most mobile browsers
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "AVB Contacts",
+        short_name: "AVB Conts",
+        start_url: "/",
+        display: "minimal-ui",
+        icon: "./static/favicon.ico",
+      },
+    },
   ],
 }
