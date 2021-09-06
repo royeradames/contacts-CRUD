@@ -42,3 +42,8 @@ img{
 a{
     text-decoration: none;
 }
+
+/* hide form element so it doesn't break the detail panel layout*/
+#contact-details{
+    display: none;
+}
