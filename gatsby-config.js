@@ -19,7 +19,6 @@ module.exports = {
   },
   /* Your site config here */
   plugins: [
-    `gatsby-plugin-material-ui`,
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -43,6 +42,7 @@ module.exports = {
         },
       },
     },
+    // allow dynamic changes of page title and description
     `gatsby-plugin-react-helmet`,
   ],
 }
