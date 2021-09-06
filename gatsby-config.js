@@ -20,6 +20,13 @@ module.exports = {
   /* Your site config here */
   plugins: [
     `gatsby-plugin-sass`,
+    // add a loading bar when the page takes more than 1 second to load
+    {
+      resolve: "gatsby-plugin-nprogress",
+      options: {
+        showSpinner: false,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
