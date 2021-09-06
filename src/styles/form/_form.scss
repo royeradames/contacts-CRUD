@@ -1,3 +1,5 @@
+$form: 835px;
+
 .form{
     /* move form to the right of contact name list */
     grid-area: detail;
@@ -11,6 +13,19 @@
         / 1fr 1fr
     ;
 
+    @media (max-width: $form){
+        /* avoid horizontal scroll bar by making everything 1 column */
+        grid-template:
+            "first-name " min-content
+            "last-name" min-content
+            "email" 1fr
+            "delete" min-content
+            " cancel-save" min-content
+            / 1fr 
+        ;
+
+    }
+
     // add white space between grid areas
     column-gap: 4rem;
     row-gap: 2.9rem;
@@ -18,12 +33,6 @@
     /* add white space around */
     padding: 7.7rem 3rem 2.2rem;
 
-    /* add a empty div to white space area and let grid place the elements by order on html */
-    &::after{
-        content: "";
-        grid-area: white-space;
-    }
-    
     /* define text for labels */
     &__input{
         // add spacing between label and field
@@ -48,15 +57,39 @@
         color: var(--red);
     }
 
+    /* add elements to form layout */
+    &__first-name-input{
+        grid-area: first-name;
+    }
+    &__last-name-input{
+        grid-area: last-name;
+    }
+    &__email{
+        grid-area: email;
+    }
     /* form buttons */
    
     &__cancel-save{
+        /* add to parent grid area */
+        grid-area: cancel-save;
         /* add space between buttons */
         display: flex;
         column-gap: 3rem;
+        @media(max-width: $form){
+            // move the gap to the row
+            column-gap: initial;
+            row-gap: 3rem;
+            
+        }
         
         /* move buttons to the left */
-        flex-direction: row-reverse;
+        justify-self: end;
+        @media(max-width: $form){
+            //center buttons 
+            justify-self: initial;
+            // move button on top to one column
+            flex-direction: column;
+        }
         
         &-save{
             /* remove bolder */
@@ -107,6 +140,9 @@
         
     }
     &__delete{
+        /* add to form layout area */
+        grid-area: delete;
+
         /* remove bolder */
         border: none;
 
@@ -122,8 +158,12 @@
         /* let user know they can click on button */
         cursor: pointer;
 
-        /* define size */
-        width: 12rem;
+        /* have the size of the button text */
+        justify-self: start;
+        @media(max-width: $form){
+            // let button cover all grid area
+            justify-self: initial;
+        }
 
         /* inverser the colors */
         &:hover{
