@@ -47,6 +47,7 @@ export default function Form(props) {
 
   /* import form fuctions */
   const {
+    setValue,
     reset,
     register,
     handleSubmit,
@@ -68,6 +69,7 @@ export default function Form(props) {
           firstName={firstName}
           lastName={lastName}
           errors={errors}
+          setValue={setValue}
         />
         <ContactEmails emailList={emailList} setEmailList={setEmailList} />
         {/* action buttons + host the contact-detail form element*/}

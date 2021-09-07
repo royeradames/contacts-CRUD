@@ -2,7 +2,12 @@ import React from "react"
 
 /* types */
 import { IFormInputs } from "./index"
-import { UseFormRegister, DeepMap, FieldError } from "react-hook-form"
+import {
+  UseFormRegister,
+  DeepMap,
+  FieldError,
+  UseFormSetValue,
+} from "react-hook-form"
 import { useState } from "react"
 export type Inputs = {
   name: string
@@ -16,11 +21,13 @@ export default function InputsName(props) {
     firstName,
     lastName,
     errors,
+    setValue,
   }: {
     register: UseFormRegister<IFormInputs>
     firstName: string
     lastName: string
     errors: DeepMap<IFormInputs, FieldError>
+    setValue: UseFormSetValue<IFormInputs>
   } = props
 
   /* list the inputs */
@@ -32,6 +39,10 @@ export default function InputsName(props) {
   return (
     <>
       {inputs.map((input, index: number) => {
+        /* set the text fields values to the given names */
+        input.name === "firstName"
+          ? setValue("firstName", firstName)
+          : setValue("lastName", lastName)
         return (
           <article
             className={`form__input form__${input.class}-input`}
@@ -46,8 +57,6 @@ export default function InputsName(props) {
               {...register(
                 input.name === "firstName" ? "firstName" : "lastName"
               )}
-              // todo: load the page with a unic page url so that the defaul value refresh every time a the user click on a contact form the list
-              defaultValue={input.name === "firstName" ? firstName : lastName}
             />
             <p className="form__error">{errors.firstName?.message}</p>
           </article>
