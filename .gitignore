@@ -67,3 +67,12 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# ignore cypress docs
+cypress/integration/1-getting-started
+cypress/integration/2-advanced-examples
+cypress/support
+
+# cypress template
+cypress/fixtures
+cypress/plugins
