@@ -3,12 +3,15 @@ import React from "react"
 import axios from "axios"
 
 /* types */
-import { IFormInputs } from "./index"
+import { IFormInputs } from "../../pages/index"
 
 /* delete, create, update contact */
 export default function ActionButtons({
-  /* panel control */
+  /* toggles */
   setShowContactDetail,
+  setIsDuplicate,
+  isSetFailSave,
+  setIsFailDelete,
   /* contact data */
   id,
   contacts,
@@ -36,12 +39,15 @@ export default function ActionButtons({
         emails: email,
       })
       .then(data => {
+        /* remove fail to save message */
+        isSetFailSave(false)
+
         /* add new contact to the contact list */
         setContacts([...contacts, data.data])
-        // todo: give the user a cue that their contact has been save
       })
       .catch(() => {
-        // todo: give the user a cue that their contact has been failed to save
+        // give the user a cue that their contact has been failed to save
+        isSetFailSave(true)
       })
   }
   /* delete the contact from the server then remove the data from the UI*/
@@ -49,6 +55,9 @@ export default function ActionButtons({
     axios
       .delete(`https://avb-contacts-api.herokuapp.com/contacts/${id}`)
       .then(() => {
+        /* remove fail deletion message */
+        setIsFailDelete(false)
+
         /* remove the user from the contact list */
         setContacts(contacts.filter(element => element.id !== id))
 
@@ -56,7 +65,8 @@ export default function ActionButtons({
         closeDetailPanel()
       })
       .catch(() => {
-        // todo: let the user know that the contact was not delete
+        // let the user know that the contact was not delete
+        setIsFailDelete(true)
       })
   }
   /* update the server selected contact info with the from submission data */
@@ -77,11 +87,10 @@ export default function ActionButtons({
       .then(data => {
         /* update the contact details */
         setSelectedContact(data.data)
-
-        // todo: show the user that the email was succesfully save
       })
       .catch(() => {
-        // todo: show the user that there was an error while saving their data
+        // show the user that there was an error while saving their data
+        isSetFailSave(true)
       })
   }
   /* when user saves do something. */
