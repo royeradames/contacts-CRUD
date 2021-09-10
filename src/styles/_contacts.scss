@@ -57,6 +57,12 @@
             background-color: var(--blue-400);
             color: var(--white-400);
         }
+
+        // highly the current displaying contact
+        &-highlight{
+            background-color: var(--blue-400);
+            color: var(--white-400);
+        }
     }
 
 }
