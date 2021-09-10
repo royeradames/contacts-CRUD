@@ -95,6 +95,22 @@ export default function ActionButtons({
   }
   /* when user saves do something. */
   const onSubmit = (data: IFormInputs) => {
+    /* don't accept duplicate contacts */
+    const newContact = `${data.firstName} ${data.lastName}`.toUpperCase()
+    for (let index = 0; index < contacts.length; index++) {
+      const contactInList =
+        `${contacts[index].firstName} ${contacts[index].lastName}`.toUpperCase()
+
+      const isContactRepeated = contactInList === newContact
+      if (isContactRepeated) {
+        //show error message
+        setIsDuplicate(true)
+        return ""
+      }
+    }
+    // if you made it to this step then there is no duplication
+    setIsDuplicate(false)
+
     /* update the user with the given information
       or create a new contact
     */
