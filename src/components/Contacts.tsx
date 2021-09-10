@@ -49,6 +49,20 @@ export default function Contacts(props) {
 
   /* assemple the contact names */
   const listContacts = (contacts: ContactList) => {
+    /* sort by name */
+    contacts.sort(function (a, b) {
+      var nameA = `${a.firstName} ${a.lastName}`.toUpperCase() // ignore upper and lowercase
+      var nameB = `${b.firstName} ${b.lastName}`.toUpperCase() // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+
+      // names must be equal
+      return 0
+    })
     /* list all names */
     return contacts.map((aContact: Contact, index: number) => {
       const lastIndex = contacts.length - 1
