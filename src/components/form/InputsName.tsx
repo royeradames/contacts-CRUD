@@ -39,9 +39,11 @@ export default function InputsName(props) {
     <>
       {inputs.map((input, index: number) => {
         /* set the text fields values to the given names */
-        input.name === "firstName"
+        const isFirstNameField = input.name === "firstName"
+        isFirstNameField
           ? setValue("firstName", firstName)
           : setValue("lastName", lastName)
+
         return (
           <article
             className={`form__input form__${input.class}-input`}
