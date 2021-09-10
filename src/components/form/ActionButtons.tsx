@@ -124,24 +124,20 @@ export default function ActionButtons({
       <div className="form__cancel-save">
         <button
           form="contact-details"
+          className="form__cancel-save-cancel"
+          type="button"
+          onClick={() => {
+            closeDetailPanel()
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          form="contact-details"
           className="form__cancel-save-save"
           type="submit"
         >
           Save
-        </button>
-        <button
-          form="contact-details"
-          className="form__cancel-save-cancel"
-          type="button"
-          onClick={() => {
-            /* close details panel */
-            // ? Why distructuring gave not a function error
-
-            closeDetailPanel()
-            // todo: scroll to the speicify id if possible
-          }}
-        >
-          Cancel
         </button>
       </div>
       <form id="contact-details" onSubmit={handleSubmit(onSubmit)}></form>
