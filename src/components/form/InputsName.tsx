@@ -59,7 +59,11 @@ export default function InputsName(props) {
                 input.name === "firstName" ? "firstName" : "lastName"
               )}
             />
-            <p className="form__error">{errors.firstName?.message}</p>
+            <p className="form__error">
+              {input.name === "firstName"
+                ? errors.firstName?.message
+                : errors.lastName?.message}
+            </p>
           </article>
         )
       })}
