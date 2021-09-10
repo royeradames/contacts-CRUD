@@ -68,12 +68,18 @@ export default function Contacts(props) {
       const lastIndex = contacts.length - 1
       const isLastContact = lastIndex === index
       const contactName = `${aContact?.firstName} ${aContact?.lastName}`
+      const selectedContactName = `${selectedContact?.firstName} ${selectedContact?.lastName}`
+      const isContactName = contactName === selectedContactName
       return (
         <button
           key={index}
-          className={`contacts__name ${
-            isLastContact ? "contacts__name-last" : ""
-          }`}
+          className={`contacts__name 
+          ${isLastContact ? "contacts__name-last" : ""}
+          ${
+            // add a unic class to the contact name that is being display
+            isContactName ? "contacts__name-highlight" : ""
+          }
+          `}
           onClick={() => {
             // show clicked contact
             props.setSelectedContact(aContact)
