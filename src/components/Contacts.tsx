@@ -5,15 +5,26 @@ import axios from "axios"
 import Add from "../assets/plug-sign.svg"
 
 /* types */
-import { Contact, ContactList } from "../pages/index"
+import { UseFormReset } from "react-hook-form"
+import { Contact, ContactList, IFormInputs } from "../pages/index"
 
 export default function Contacts(props) {
   const {
+    selectedContact,
     contacts,
     setContacts,
+    reset,
+    setIsDuplicate,
+    isSetFailSave,
+    setIsFailDelete,
   }: {
+    selectedContact: Contact
     contacts: ContactList
     setContacts: React.Dispatch<React.SetStateAction<ContactList>>
+    reset: UseFormReset<IFormInputs>
+    setIsDuplicate: React.Dispatch<React.SetStateAction<boolean>>
+    isSetFailSave: React.Dispatch<React.SetStateAction<boolean>>
+    setIsFailDelete: React.Dispatch<React.SetStateAction<boolean>>
   } = props
 
   /* get the list of names when page first loads */
