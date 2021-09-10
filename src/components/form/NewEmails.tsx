@@ -7,23 +7,38 @@ import Add from "../../assets/plug-sign.svg"
 import { useState } from "react"
 
 /* types */
-type IFormInputs = {
+import { UseFormGetValues } from "react-hook-form"
+import { Contact, IFormInputs } from "../../pages"
+import { EmailList } from "./index"
+type NewEmailInputs = {
   email: string
 }
 
-export default function NewEmail({ setEmailList, emailList }) {
+export default function NewEmail({
+  setEmailList,
+  emailList,
+  setSelectedContact,
+  selectedContact,
+  getValues,
+}: {
+  emailList: EmailList
+  setEmailList: React.Dispatch<React.SetStateAction<EmailList>>
+  setSelectedContact: React.Dispatch<React.SetStateAction<Contact>>
+  selectedContact: Contact
+  getValues: UseFormGetValues<IFormInputs>
+}) {
   const {
     setValue,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>()
+  } = useForm<NewEmailInputs>()
 
   const innitError = { type: "", message: "" }
   const [error, setError] = useState(innitError)
 
   /* save email */
-  const onSubmit = (data: IFormInputs) => {
+  const onSubmit = (data: NewEmailInputs) => {
     const { email } = data
 
     const notDuplicate = emailList.indexOf(email) === -1 ? true : false
@@ -31,6 +46,14 @@ export default function NewEmail({ setEmailList, emailList }) {
     /* add to the unsave email list */
     // don't allow duplicates
     if (notDuplicate) {
+      // save the text field inputs
+      setSelectedContact({
+        ...selectedContact,
+        firstName: getValues("firstName"),
+        lastName: getValues("lastName"),
+      })
+
+      // add new email
       setEmailList([...emailList, email])
 
       /* reset text field */
