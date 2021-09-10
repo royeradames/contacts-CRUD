@@ -1,14 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 
 /* types */
-import { IFormInputs } from "./index"
+import { IFormInputs } from "../../pages/index"
 import {
   UseFormRegister,
   DeepMap,
   FieldError,
   UseFormSetValue,
 } from "react-hook-form"
-import { useState } from "react"
 export type Inputs = {
   name: string
   class: string
