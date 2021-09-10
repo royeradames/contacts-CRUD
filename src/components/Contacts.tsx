@@ -84,6 +84,14 @@ export default function Contacts(props) {
             // show clicked contact
             props.setSelectedContact(aContact)
 
+            // reset form
+            reset()
+
+            // when changing contact remove the error message
+            setIsDuplicate(false)
+            isSetFailSave(false)
+            setIsFailDelete(false)
+
             /* show detail panel*/
             props.setShowContactDetail(true)
           }}
