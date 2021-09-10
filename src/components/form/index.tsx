@@ -83,6 +83,23 @@ export default function Form(props) {
           handleSubmit={handleSubmit}
           setShowContactDetail={props.setShowContactDetail}
         />
+
+        {/* main form CRUD error messages */}
+        <article className="form__save-error form__error">
+          {props.isDuplicate && (
+            <p className="form__error-duplication ">Contact already exist.</p>
+          )}
+          {props.isFailSave && (
+            <p className="form__error-duplication ">
+              Form failed to save, try another time.
+            </p>
+          )}
+          {props.isFailDelete && (
+            <p className="form__error-duplication ">
+              Form failed to delete, try another time.
+            </p>
+          )}
+        </article>
       </article>
     </>
   )
