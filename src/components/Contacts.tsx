@@ -67,6 +67,7 @@ export default function Contacts(props) {
     return contacts.map((aContact: Contact, index: number) => {
       const lastIndex = contacts.length - 1
       const isLastContact = lastIndex === index
+      const contactName = `${aContact?.firstName} ${aContact?.lastName}`
       return (
         <button
           key={index}
@@ -80,7 +81,9 @@ export default function Contacts(props) {
             /* show detail panel*/
             props.setShowContactDetail(true)
           }}
-        >{`${aContact?.firstName} ${aContact?.lastName}`}</button>
+        >
+          {contactName}
+        </button>
       )
     })
   }
