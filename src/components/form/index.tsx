@@ -1,29 +1,23 @@
 /* libraries */
 import React, { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import { create } from "yup/lib/Reference"
+import {
+  UseFormSetValue,
+  UseFormReset,
+  UseFormRegister,
+  UseFormHandleSubmit,
+  FieldError,
+  DeepMap,
+  UseFormGetValues,
+} from "react-hook-form"
 
 /* components */
 import InputsName from "./InputsName"
 
 /* types */
-import { Contact, ContactList } from "../../pages/index"
+import { Contact, ContactList, IFormInputs } from "../../pages/index"
 import ContactEmails from "./ContactEmails"
 import ActionButtons from "./ActionButtons"
-export interface IFormInputs {
-  firstName: string
-  lastName: string
-  emails: string[]
-}
 export type EmailList = string[] | []
-
-/* schema */
-const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-})
 
 export default function Form(props) {
   const {
@@ -33,10 +27,26 @@ export default function Form(props) {
 
     /* current selected contact data */
     setSelectedContact,
+    selectedContact,
+
+    /* form methods */
+    getValues,
+    setValue,
+    reset,
+    register,
+    handleSubmit,
+    errors,
   }: {
     contacts: ContactList
     setContacts: React.Dispatch<React.SetStateAction<ContactList>>
     setSelectedContact: React.Dispatch<React.SetStateAction<Contact>>
+    selectedContact: Contact
+    getValues: UseFormGetValues<IFormInputs>
+    setValue: UseFormSetValue<IFormInputs>
+    reset: UseFormReset<IFormInputs>
+    register: UseFormRegister<IFormInputs>
+    handleSubmit: UseFormHandleSubmit<IFormInputs>
+    errors: DeepMap<IFormInputs, FieldError>
   } = props
 
   /* capture selected contact data */
@@ -44,17 +54,6 @@ export default function Form(props) {
 
   /* UI render when email it's change */
   const [emailList, setEmailList] = useState<EmailList>(emails)
-
-  /* import form fuctions */
-  const {
-    setValue,
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(schema),
-  })
 
   /* update the email list when the contact changes */
   useEffect(() => {
@@ -71,7 +70,13 @@ export default function Form(props) {
           errors={errors}
           setValue={setValue}
         />
-        <ContactEmails emailList={emailList} setEmailList={setEmailList} />
+        <ContactEmails
+          emailList={emailList}
+          setEmailList={setEmailList}
+          setSelectedContact={setSelectedContact}
+          selectedContact={selectedContact}
+          getValues={getValues}
+        />
         {/* action buttons + host the contact-detail form element*/}
         <ActionButtons
           id={id}
@@ -82,6 +87,9 @@ export default function Form(props) {
           reset={reset}
           handleSubmit={handleSubmit}
           setShowContactDetail={props.setShowContactDetail}
+          setIsDuplicate={props.setIsDuplicate}
+          isSetFailSave={props.isSetFailSave}
+          setIsFailDelete={props.setIsFailDelete}
         />
 
         {/* main form CRUD error messages */}

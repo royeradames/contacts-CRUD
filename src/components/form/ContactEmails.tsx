@@ -1,6 +1,4 @@
 import React from "react"
-import { Contact } from "../../pages"
-
 /* Components */
 import NewEmails from "./NewEmails"
 
@@ -8,6 +6,8 @@ import NewEmails from "./NewEmails"
 import Substract from "../../assets/minus-button.svg"
 
 /* types */
+import { UseFormGetValues } from "react-hook-form"
+import { Contact, IFormInputs } from "../../pages"
 import { EmailList } from "./index"
 
 /*  
@@ -17,9 +17,15 @@ import { EmailList } from "./index"
 export default function ContactEmails({
   emailList,
   setEmailList,
+  setSelectedContact,
+  selectedContact,
+  getValues,
 }: {
   emailList: EmailList
   setEmailList: React.Dispatch<React.SetStateAction<EmailList>>
+  setSelectedContact: React.Dispatch<React.SetStateAction<Contact>>
+  selectedContact: Contact
+  getValues: UseFormGetValues<IFormInputs>
 }) {
   return (
     /* display a email label with the email list text */
@@ -50,7 +56,13 @@ export default function ContactEmails({
           )
         })}
       </article>
-      <NewEmails setEmailList={setEmailList} emailList={emailList} />
+      <NewEmails
+        setEmailList={setEmailList}
+        emailList={emailList}
+        setSelectedContact={setSelectedContact}
+        selectedContact={selectedContact}
+        getValues={getValues}
+      />
     </article>
   )
 }
