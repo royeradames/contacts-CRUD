@@ -53,6 +53,9 @@ const reducer = (state = defaultState, action) => {
       return { ...state, isFailSave: action.payload }
     case "setIsFailDelete":
       return { ...state, isFailDelete: action.payload }
+    // contact detail pannel
+    case "setShowContactDetail":
+      return { ...state, showContactDetail: action.payload }
 
     default:
       return state
