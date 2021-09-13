@@ -94,3 +94,20 @@ describe("update contact", function () {
     cy.contains("testing@gmail.com")
   })
 })
+
+describe("delete contact ", function () {
+  it("delete a contact", () => {
+    // find update contact
+    cy.contains(/testing e2e/i).click()
+
+    // click delete button
+    cy.get(".form__delete")
+      .contains(/delete/i)
+      .click()
+
+    // check that the contact has been remove from the contact list
+    cy.get(".contacts__name")
+      .contains(/testing e2e/i)
+      .should("not.exist")
+  })
+})
