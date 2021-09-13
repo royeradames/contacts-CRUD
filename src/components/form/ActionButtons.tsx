@@ -97,12 +97,12 @@ export default function ActionButtons() {
     }
   }
   /* update the server selected contact info with the from submission data */
-  const save = (
-    id: string,
-    firstName: string,
-    lastName: string,
-    emails: string[] | []
-  ) => {
+  const update = ({
+    id,
+    firstName,
+    lastName,
+    emails,
+  }: FormState["selectedContact"]) => {
     /* update contact without the delete email */
     axios
       .put(`https://avb-contacts-api.herokuapp.com/contacts/${id}`, {
@@ -112,8 +112,11 @@ export default function ActionButtons() {
         emails,
       })
       .then(data => {
-        /* update the contact details */
+        // update the selected contact details
         setSelectedContact(data.data)
+
+        // add contact to the contact list
+        setContactList([...contactList, data.data])
       })
       .catch(() => {
         // show the user that there was an error while saving their data
@@ -141,9 +144,15 @@ export default function ActionButtons() {
     /* update the user with the given information
       or create a new contact
     */
-    id
-      ? save(id, data.firstName, data.lastName, emailList)
-      : create(data.firstName, data.lastName, emailList)
+    const isNewContact = id === "-1"
+    isNewContact
+      ? create(data.firstName, data.lastName, contactEmails)
+      : update({
+          id: id,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          emails: contactEmails,
+        })
   }
   return (
     <>
