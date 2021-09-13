@@ -62,6 +62,14 @@ const reducer = (state = defaultState, action) => {
     case "setContactList":
       return { ...state, contactList: action.payload }
     case "setSelectedContactEmails":
+      // update the selected contact email list state
+      return {
+        ...state,
+        selectedContact: {
+          ...state.selectedContact,
+          emails: action.payload,
+        },
+      }
 
     default:
       return state
