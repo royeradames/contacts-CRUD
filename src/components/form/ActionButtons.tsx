@@ -70,22 +70,31 @@ export default function ActionButtons() {
   }
   /* delete the contact from the server then remove the data from the UI*/
   const deleteContact = (id: string) => {
-    axios
-      .delete(`https://avb-contacts-api.herokuapp.com/contacts/${id}`)
-      .then(() => {
-        /* remove fail deletion message */
-        setIsFailDelete(false)
+    /* delete from server */
+    if (id) {
+      axios
+        .delete(`https://avb-contacts-api.herokuapp.com/contacts/${id}`)
+        .then(() => {
+          // remove fail deletion message
+          setIsFailDelete(false)
 
-        /* remove the user from the contact list */
-        setContactList(contactList.filter(element => element.id !== id))
+          // remove the user from the contact list
+          setContactList(contactList.filter(element => element.id !== id))
 
-        /* let user know it was a success by closing the panel */
-        closeDetailPanel()
-      })
-      .catch(() => {
-        // let the user know that the contact was not delete
-        setIsFailDelete(true)
-      })
+          // let user know it was a success by closing the panel
+          closeDetailPanel()
+        })
+        .catch(() => {
+          // let the user know that the contact was not delete
+          setIsFailDelete(true)
+        })
+    } else {
+      /* delete unsave contact information */
+      // close the details panel
+      closeDetailPanel()
+      // reset text fields
+      reset()
+    }
   }
   /* update the server selected contact info with the from submission data */
   const save = (
@@ -143,14 +152,7 @@ export default function ActionButtons() {
         type="button"
         className="form__delete"
         onClick={() => {
-          /* delete user from server or */
-          if (id) deleteContact(id)
-          else {
-            /* close the details panel */
-            closeDetailPanel()
-            /* reset text fields */
-            reset()
-          }
+          deleteContact(id)
         }}
       >
         Delete
