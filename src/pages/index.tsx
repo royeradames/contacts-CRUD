@@ -1,8 +1,6 @@
 /* libraries */
 import React, { useState } from "react"
-import * as yup from "yup"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { useFormMethods } from "../components/form/useFormMethods"
 
 /* components */
 import Contacts from "../components/Contacts"
@@ -12,40 +10,9 @@ import SEO from "../components/SEO"
 /* styles */
 import "../styles/main.scss"
 
-/* types */
-export interface IFormInputs {
-  firstName: string
-  lastName: string
-  emails: string[]
-}
-
-export type Contact = {
-  id: string
-  firstName: string
-  lastName: string
-  emails: string[] | []
-}
-
-export type ContactList = Contact[]
-
-/* schema */
-const schema = yup.object().shape({
-  firstName: yup.string().required("First name is required."),
-  lastName: yup.string().required("Last name is required"),
-})
-
 export default function Home() {
-  /* import form fuctions */
-  const {
-    getValues,
-    setValue,
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(schema),
-  })
+  const { getValues, setValue, reset, register, handleSubmit, errors } =
+    useFormMethods()
   /* detail information of a contact */
   const innitContact: Contact = {
     id: "",
