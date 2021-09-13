@@ -2,6 +2,6 @@
     // add list and form side by side
     display: grid;
     grid-template: 
-        "list detail" 1fr/min-content 1fr
+        "list detail" 100vh/min-content 1fr
     ;
 }
