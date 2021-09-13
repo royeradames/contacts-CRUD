@@ -1,7 +1,6 @@
-![AVB-contact-app](readme-assets/AVB-contact-app.png)
 # AVB Contact App
 
-https://youtu.be/o4oYN7jcoK4
+[![AVB-contact-app](readme-assets/CRUD-test.PNG)](https://youtu.be/o4oYN7jcoK4)
 
 ## To run the test and cypress testing
 
