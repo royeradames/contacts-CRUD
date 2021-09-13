@@ -1,6 +1,6 @@
 .contacts{
     // add scolling bar if there is more contact that available view port
-    overflow: auto;
+    overflow: scroll;
     
     // add blue color background
     background-color: var(--blue-200);
@@ -15,7 +15,7 @@
         // add spacing between icon and title
         display: flex;
         column-gap: 2.1rem;
-        justify-items: center;
+        align-items: center;
 
         // add space inbetween title
         padding: 1.4rem 1.7rem 2rem;
@@ -30,6 +30,12 @@
             &:hover{
                 color: var(--blue-400);
             }
+        }
+        &-icon{
+            justify-self: start;
+            height: 3.2rem;
+            width: 3.2rem;
+            z-index: 1;
         }
     }
 
