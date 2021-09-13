@@ -59,7 +59,7 @@ module.exports = {
         short_name: "AVB Conts",
         start_url: "/",
         display: "minimal-ui",
-        icon: "./static/favicon.ico",
+        icon: "./static/favicon-32x32.png",
       },
     },
     // allow offline access
