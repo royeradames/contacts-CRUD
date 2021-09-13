@@ -39,3 +39,58 @@ describe("create new Contact", function () {
     cy.contains(/Form failed to save/i).should("not.exist")
   })
 })
+describe("update contact", function () {
+  it("Change the create contact", () => {
+    // go to contact
+    cy.contains(/cypress royer/i).click()
+
+    // delete all emails
+    cy.get(".emails__list-email").children("svg").first().click()
+    cy.get(".emails__list-email").children("svg").first().click()
+
+    /* add new emails */
+
+    cy.get("input[type=email").type("e2e@gmail.com")
+    cy.get("button[form=new-email]").click()
+    cy.get("input[type=email").type("testing@gmail.com")
+    cy.get("button[form=new-email]").click()
+
+    // change the first and last name
+    cy.get(".form__first-name-input > .form__text-field")
+      .clear()
+      .should("have.value", "")
+      .type("testing")
+    cy.get(".form__last-name-input > .form__text-field")
+      .clear()
+      .should("have.value", "")
+      .type("e2e")
+
+    //  save
+    cy.contains(/save/i).click()
+
+    // change contact
+    cy.get(".contacts__name")
+      .not(cy.contains(/testing e2e/i))
+      .first()
+      .click()
+
+    // find update contact
+    cy.contains(/testing e2e/i).click()
+
+    /* check that it was update */
+    // name is correct
+    cy.contains(/first name/i)
+      .parent()
+      .find("input")
+      .should("have.value", "testing")
+
+    cy.contains(/last name/i)
+      .parent()
+      .find("input")
+      .should("have.value", "e2e")
+
+    // emails are there
+    cy.contains("e2e@gmail.com")
+    cy.contains("testing@gmail.com")
+  })
+})
