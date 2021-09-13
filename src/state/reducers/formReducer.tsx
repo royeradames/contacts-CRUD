@@ -56,6 +56,12 @@ const reducer = (state = defaultState, action) => {
     // contact detail pannel
     case "setShowContactDetail":
       return { ...state, showContactDetail: action.payload }
+    /* current contact details and contact name list state */
+    case "setSelectedContact":
+      return { ...state, selectedContact: action.payload }
+    case "setContactList":
+      return { ...state, contactList: action.payload }
+    case "setSelectedContactEmails":
 
     default:
       return state
