@@ -70,7 +70,9 @@ const reducer = (state = defaultState, action) => {
           emails: action.payload,
         },
       }
-
+    /* form methods */
+    case "setFormMethods":
+      return { ...state, formMethods: action.payload }
     default:
       return state
   }
