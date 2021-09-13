@@ -1,27 +1,45 @@
 /* libraries */
 import React from "react"
 import axios from "axios"
+import { IFormInputs } from "./useFormMethods"
 
-/* types */
-import { IFormInputs } from "../../pages/index"
+// redux
+import { useSelector, useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../../state/index"
+import { FormState } from "../../state/reducers/formReducer"
 
 /* delete, create, update contact */
-export default function ActionButtons({
-  /* toggles */
-  setShowContactDetail,
-  setIsDuplicate,
-  isSetFailSave,
-  setIsFailDelete,
-  /* contact data */
-  id,
-  contacts,
-  setContacts,
-  setSelectedContact,
-  emailList,
-  /* form methods */
-  reset,
-  handleSubmit,
-}) {
+export default function ActionButtons() {
+  /* redux */
+  // get states
+  const { id, contactList, contactEmails, formMethods } = useSelector(
+    ({ form }: { form: FormState }) => {
+      return {
+        /* contact data */
+        id: form.selectedContact.id,
+        contactList: form.contactList,
+        contactEmails: form.selectedContact.emails,
+        formMethods: form.formMethods,
+      }
+    }
+  )
+
+  // methods to update state
+  const dispatch = useDispatch()
+  const {
+    /* toggles */
+    setShowContactDetail,
+    setIsDuplicate,
+    setIsFailDelete,
+    setIsFailSave,
+    /* contact data */
+    setContactList,
+    setSelectedContact,
+  } = bindActionCreators(actionCreators, dispatch)
+  /* get form methods */
+  const { reset, handleSubmit } = formMethods
+
   /* handle the closing of the detail panel */
   const closeDetailPanel = () => {
     setShowContactDetail(false)
@@ -40,14 +58,14 @@ export default function ActionButtons({
       })
       .then(data => {
         /* remove fail to save message */
-        isSetFailSave(false)
+        setIsFailSave(false)
 
         /* add new contact to the contact list */
-        setContacts([...contacts, data.data])
+        setContactList([...contactList, data.data])
       })
       .catch(() => {
         // give the user a cue that their contact has been failed to save
-        isSetFailSave(true)
+        setIsFailSave(true)
       })
   }
   /* delete the contact from the server then remove the data from the UI*/
@@ -59,7 +77,7 @@ export default function ActionButtons({
         setIsFailDelete(false)
 
         /* remove the user from the contact list */
-        setContacts(contacts.filter(element => element.id !== id))
+        setContactList(contactList.filter(element => element.id !== id))
 
         /* let user know it was a success by closing the panel */
         closeDetailPanel()
@@ -90,16 +108,16 @@ export default function ActionButtons({
       })
       .catch(() => {
         // show the user that there was an error while saving their data
-        isSetFailSave(true)
+        setIsFailSave(true)
       })
   }
   /* when user saves do something. */
   const onSubmit = (data: IFormInputs) => {
     /* don't accept duplicate contacts */
     const newContact = `${data.firstName} ${data.lastName}`.toUpperCase()
-    for (let index = 0; index < contacts.length; index++) {
+    for (let index = 0; index < contactList.length; index++) {
       const contactInList =
-        `${contacts[index].firstName} ${contacts[index].lastName}`.toUpperCase()
+        `${contactList[index].firstName} ${contactList[index].lastName}`.toUpperCase()
 
       const isContactRepeated = contactInList === newContact
       if (isContactRepeated) {

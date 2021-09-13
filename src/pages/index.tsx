@@ -1,7 +1,10 @@
 /* libraries */
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import { useFormMethods } from "../components/form/useFormMethods"
-
+// redux
+import { useSelector, useDispatch } from "react-redux"
+import { actionCreators } from "../state/index"
+import { bindActionCreators } from "redux"
 /* components */
 import Contacts from "../components/Contacts"
 import Form from "../components/form/index"
@@ -9,71 +12,40 @@ import SEO from "../components/SEO"
 
 /* styles */
 import "../styles/main.scss"
+import { FormState } from "../state/reducers/formReducer"
 
 export default function Home() {
+  /* redux */
+  // get states
+  const { showContactDetail } = useSelector(({ form }: { form: FormState }) => {
+    return {
+      showContactDetail: form.showContactDetail,
+    }
+  })
+
+  // get methods to update states
+  const dispatch = useDispatch()
+  const { setFormMethods } = bindActionCreators(actionCreators, dispatch)
   const { getValues, setValue, reset, register, handleSubmit, errors } =
     useFormMethods()
-  /* detail information of a contact */
-  const innitContact: Contact = {
-    id: "",
-    firstName: "",
-    lastName: "",
-    emails: [],
-  }
-  const [selectedContact, setSelectedContact] = useState(innitContact)
 
-  /* toggle for detail panel */
-  const [showContactDetail, setShowContactDetail] = useState(false)
-
-  /* toggle CRUD error messages */
-  // toggle contact duplication error
-  const [isDuplicate, setIsDuplicate] = useState(false)
-  // contact could not be save
-  const [isFailSave, isSetFailSave] = useState(false)
-  // contact could not be deleted
-  const [isFailDelete, setIsFailDelete] = useState(false)
-
-  /* list of names of the contact panel */
-  // todo: update name to contactList
-  const [contacts, setContacts] = useState<ContactList>([])
+  /* save form methods to redux store for global use */
+  useEffect(() => {
+    setFormMethods({
+      getValues,
+      setValue,
+      reset,
+      register,
+      handleSubmit,
+      errors,
+    })
+  }, [])
 
   return (
     <main className="layout">
       <SEO title="AVB Contacts" />
-      <Contacts
-        selectedContact={selectedContact}
-        setSelectedContact={setSelectedContact}
-        setShowContactDetail={setShowContactDetail}
-        contacts={contacts}
-        setContacts={setContacts}
-        reset={reset}
-        setIsDuplicate={setIsDuplicate}
-        isSetFailSave={isSetFailSave}
-        setIsFailDelete={setIsFailDelete}
-      />
-      {showContactDetail ? (
-        <Form
-          selectedContact={selectedContact}
-          setSelectedContact={setSelectedContact}
-          setShowContactDetail={setShowContactDetail}
-          contacts={contacts}
-          setContacts={setContacts}
-          setValue={setValue}
-          reset={reset}
-          register={register}
-          handleSubmit={handleSubmit}
-          errors={errors}
-          getValues={getValues}
-          isDuplicate={isDuplicate}
-          setIsDuplicate={setIsDuplicate}
-          isFailSave={isFailSave}
-          isSetFailSave={isSetFailSave}
-          isFailDelete={isFailDelete}
-          setIsFailDelete={setIsFailDelete}
-        />
-      ) : (
-        ""
-      )}
+      <Contacts />
+      {showContactDetail ? <Form /> : ""}
     </main>
   )
 }

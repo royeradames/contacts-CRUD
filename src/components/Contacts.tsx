@@ -2,55 +2,62 @@
 import React, { useEffect } from "react"
 import axios from "axios"
 
+// redux
+import { useSelector, useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../state/index"
+
 /* SVGs */
 import Add from "../assets/plug-sign.svg"
 
 /* types */
-import { UseFormReset } from "react-hook-form"
-import { Contact, ContactList, IFormInputs } from "../pages/index"
+import { FormState } from "../state/reducers/formReducer"
 
-export default function Contacts(props) {
+export default function Contacts() {
+  /* redux state */
+  // get states
+  const { contactList, selectedContact, formMethods } = useSelector(
+    ({ form }: { form: FormState }) => {
+      return {
+        contactList: form.contactList,
+        selectedContact: form.selectedContact,
+        formMethods: form.formMethods,
+      }
+    }
+  )
+  const { reset } = formMethods
+
+  // update states
+  const dispatch = useDispatch()
   const {
-    selectedContact,
-    contacts,
-    setContacts,
-    reset,
+    setContactList,
     setIsDuplicate,
-    isSetFailSave,
+    setIsFailSave,
     setIsFailDelete,
-  }: {
-    selectedContact: Contact
-    contacts: ContactList
-    setContacts: React.Dispatch<React.SetStateAction<ContactList>>
-    reset: UseFormReset<IFormInputs>
-    setIsDuplicate: React.Dispatch<React.SetStateAction<boolean>>
-    isSetFailSave: React.Dispatch<React.SetStateAction<boolean>>
-    setIsFailDelete: React.Dispatch<React.SetStateAction<boolean>>
-  } = props
+    setShowContactDetail,
+    setSelectedContact,
+  } = bindActionCreators(actionCreators, dispatch)
 
   /* get the list of names when page first loads */
   useEffect(() => {
     axios
       .get("https://avb-contacts-api.herokuapp.com/contacts/paginated")
       .then(response => {
-        setContacts(response.data.contacts)
+        setContactList(response.data.contacts)
 
         // on page load default to show the first contact
         const firstContact = response.data.contacts[0]
-        props.setSelectedContact(firstContact)
+        setSelectedContact(firstContact)
         // show the form page
-        props.setShowContactDetail(true)
+        setShowContactDetail(true)
       })
       .catch(() => {
-        setContacts([
+        setContactList([
           { id: "-1", firstName: "No", lastName: "contacts", emails: [] },
         ])
       })
   }, [])
-
-  /* assemple the contact names */
-  const listContacts = (contacts: ContactList) => {
-    /* sort by name */
+  function sortAlphabetically(contacts: FormState["contactList"]) {
     contacts.sort(function (a, b) {
       var nameA = `${a.firstName} ${a.lastName}`.toUpperCase() // ignore upper and lowercase
       var nameB = `${b.firstName} ${b.lastName}`.toUpperCase() // ignore upper and lowercase
@@ -64,54 +71,64 @@ export default function Contacts(props) {
       // names must be equal
       return 0
     })
+  }
+  function changeContact(aContact: FormState["selectedContact"]) {
+    // show clicked contact
+    setSelectedContact(aContact)
+
+    // reset form
+    reset()
+
+    // when changing contact remove the error message
+    setIsDuplicate(false)
+    setIsFailSave(false)
+    setIsFailDelete(false)
+
+    /* show detail panel*/
+    setShowContactDetail(true)
+  }
+  /* assemple the contact names */
+  const listContacts = (contacts: FormState["contactList"]) => {
+    /* sort by name */
+    sortAlphabetically(contacts)
+
     /* list all names */
-    return contacts.map((aContact: Contact, index: number) => {
-      const lastIndex = contacts.length - 1
-      const isLastContact = lastIndex === index
-      const contactName = `${aContact?.firstName} ${aContact?.lastName}`
-      const selectedContactName = `${selectedContact?.firstName} ${selectedContact?.lastName}`
-      const isContactName = contactName === selectedContactName
-      return (
-        <button
-          key={index}
-          className={`contacts__name 
+    return contactList.map(
+      (aContact: FormState["selectedContact"], index: number) => {
+        const lastIndex = contacts.length - 1
+        const isLastContact = lastIndex === index
+        const contactName = `${aContact?.firstName} ${aContact?.lastName}`
+        const selectedContactName = `${selectedContact?.firstName} ${selectedContact?.lastName}`
+        const isContactName = contactName === selectedContactName
+        return (
+          <button
+            key={index}
+            className={`contacts__name 
           ${isLastContact ? "contacts__name-last" : ""}
           ${
             // add a unic class to the contact name that is being display
             isContactName ? "contacts__name-highlight" : ""
           }
           `}
-          onClick={() => {
-            // show clicked contact
-            props.setSelectedContact(aContact)
-
-            // reset form
-            reset()
-
-            // when changing contact remove the error message
-            setIsDuplicate(false)
-            isSetFailSave(false)
-            setIsFailDelete(false)
-
-            /* show detail panel*/
-            props.setShowContactDetail(true)
-          }}
-        >
-          {contactName}
-        </button>
-      )
-    })
+            onClick={() => changeContact(aContact)}
+          >
+            {contactName}
+          </button>
+        )
+      }
+    )
   }
   const innitNewContact = () => {
     // show a empty detail panel
-    props.setSelectedContact({
+    setSelectedContact({
+      id: "-1",
       firstName: "",
       lastName: "",
       emails: [],
     })
 
     // show detail panel
-    props.setShowContactDetail(true)
+    setShowContactDetail(true)
   }
   return (
     <article className="contacts">
@@ -123,7 +140,7 @@ export default function Contacts(props) {
         <h1 className="contacts__add-title">Contacts</h1>
         <Add className="contacts__add-icon" />
       </article>
-      <article>{listContacts(contacts)}</article>
+      <article>{listContacts(contactList)}</article>
     </article>
   )
 }

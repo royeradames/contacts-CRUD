@@ -1,108 +1,65 @@
 /* libraries */
-import React, { useEffect, useState } from "react"
-import {
-  UseFormSetValue,
-  UseFormReset,
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldError,
-  DeepMap,
-  UseFormGetValues,
-} from "react-hook-form"
+import React, { useEffect } from "react"
+
+/* redux */
+import { useSelector, useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../../state/index"
 
 /* components */
 import InputsName from "./InputsName"
 
 /* types */
-import { Contact, ContactList, IFormInputs } from "../../pages/index"
+// import { IFormInputs } from "../../pages/index"
+import { FormState } from "../../state/reducers/formReducer"
 import ContactEmails from "./ContactEmails"
 import ActionButtons from "./ActionButtons"
-export type EmailList = string[] | []
 
-export default function Form(props) {
-  const {
-    /* list of the contact names */
-    contacts,
-    setContacts,
-
-    /* current selected contact data */
-    setSelectedContact,
-    selectedContact,
-
-    /* form methods */
-    getValues,
-    setValue,
-    reset,
-    register,
-    handleSubmit,
-    errors,
-  }: {
-    contacts: ContactList
-    setContacts: React.Dispatch<React.SetStateAction<ContactList>>
-    setSelectedContact: React.Dispatch<React.SetStateAction<Contact>>
-    selectedContact: Contact
-    getValues: UseFormGetValues<IFormInputs>
-    setValue: UseFormSetValue<IFormInputs>
-    reset: UseFormReset<IFormInputs>
-    register: UseFormRegister<IFormInputs>
-    handleSubmit: UseFormHandleSubmit<IFormInputs>
-    errors: DeepMap<IFormInputs, FieldError>
-  } = props
-
-  /* capture selected contact data */
-  const { id, firstName, lastName, emails }: Contact = props.selectedContact
-
-  /* UI render when email it's change */
-  const [emailList, setEmailList] = useState<EmailList>(emails)
+export default function Form() {
+  /* redux */
+  // get state
+  const { emails, isDuplicate, isFailSave, isFailDelete } = useSelector(
+    ({ form }: { form: FormState }) => {
+      return {
+        emails: form.selectedContact.emails,
+        isDuplicate: form.isDuplicate,
+        isFailSave: form.isFailSave,
+        isFailDelete: form.isFailDelete,
+      }
+    }
+  )
+  // get methods to update state
+  const dispatch = useDispatch()
+  const { setSelectedContactEmails: setContactEmails } = bindActionCreators(
+    actionCreators,
+    dispatch
+  )
 
   /* update the email list when the contact changes */
   useEffect(() => {
-    setEmailList(emails)
+    // setEmailList(emails)
+    setContactEmails(emails)
   }, [emails])
 
   return (
     <>
       <article className="form">
-        <InputsName
-          register={register}
-          firstName={firstName}
-          lastName={lastName}
-          errors={errors}
-          setValue={setValue}
-        />
-        <ContactEmails
-          emailList={emailList}
-          setEmailList={setEmailList}
-          setSelectedContact={setSelectedContact}
-          selectedContact={selectedContact}
-          getValues={getValues}
-        />
+        <InputsName />
+        <ContactEmails />
         {/* action buttons + host the contact-detail form element*/}
-        <ActionButtons
-          id={id}
-          contacts={contacts}
-          setContacts={setContacts}
-          setSelectedContact={setSelectedContact}
-          emailList={emailList}
-          reset={reset}
-          handleSubmit={handleSubmit}
-          setShowContactDetail={props.setShowContactDetail}
-          setIsDuplicate={props.setIsDuplicate}
-          isSetFailSave={props.isSetFailSave}
-          setIsFailDelete={props.setIsFailDelete}
-        />
+        <ActionButtons />
 
         {/* main form CRUD error messages */}
         <article className="form__save-error form__error">
-          {props.isDuplicate && (
+          {isDuplicate && (
             <p className="form__error-duplication ">Contact already exist.</p>
           )}
-          {props.isFailSave && (
+          {isFailSave && (
             <p className="form__error-duplication ">
               Form failed to save, try another time.
             </p>
           )}
-          {props.isFailDelete && (
+          {isFailDelete && (
             <p className="form__error-duplication ">
               Form failed to delete, try another time.
             </p>

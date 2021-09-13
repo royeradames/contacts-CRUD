@@ -1,32 +1,45 @@
 /* libraries */
-import React, { useEffect } from "react"
+import React from "react"
 import { useForm } from "react-hook-form"
+import { useFormMethods } from "./useFormMethods"
+
+// redux
+import { useDispatch, useSelector } from "react-redux"
+import { actionCreators } from "../../state"
+import { bindActionCreators } from "redux"
 
 /* SVGs */
 import Add from "../../assets/plug-sign.svg"
 import { useState } from "react"
 
 /* types */
-import { UseFormGetValues } from "react-hook-form"
-import { Contact, IFormInputs } from "../../pages"
-import { EmailList } from "./index"
+import { FormState } from "../../state/reducers/formReducer"
+
 type NewEmailInputs = {
   email: string
 }
 
-export default function NewEmail({
-  setEmailList,
-  emailList,
-  setSelectedContact,
-  selectedContact,
-  getValues,
-}: {
-  emailList: EmailList
-  setEmailList: React.Dispatch<React.SetStateAction<EmailList>>
-  setSelectedContact: React.Dispatch<React.SetStateAction<Contact>>
-  selectedContact: Contact
-  getValues: UseFormGetValues<IFormInputs>
-}) {
+export default function NewEmail() {
+  /* redux */
+  // get states
+  const { contactEmails, selectedContact, formMethods } = useSelector(
+    ({ form }: { form: FormState }) => {
+      return {
+        contactEmails: form.selectedContact.emails,
+        selectedContact: form.selectedContact,
+        formMethods: form.formMethods,
+      }
+    }
+  )
+
+  // get methods to update the states
+  const dispatch = useDispatch()
+  const { setSelectedContactEmails: setContactEmails, setSelectedContact } =
+    bindActionCreators(actionCreators, dispatch)
+  /* get form methods */
+  const { getValues } = formMethods
+
+  /* innit new contact email form */
   const {
     setValue,
     register,
@@ -38,10 +51,8 @@ export default function NewEmail({
   const [error, setError] = useState(innitError)
 
   /* save email */
-  const onSubmit = (data: NewEmailInputs) => {
-    const { email } = data
-
-    const notDuplicate = emailList.indexOf(email) === -1 ? true : false
+  const onSubmit = ({ email }: NewEmailInputs) => {
+    const notDuplicate = contactEmails.indexOf(email) === -1 ? true : false
 
     /* add to the unsave email list */
     // don't allow duplicates
@@ -54,7 +65,7 @@ export default function NewEmail({
       })
 
       // add new email
-      setEmailList([...emailList, email])
+      setContactEmails([...contactEmails, email])
 
       /* reset text field */
       setValue("email", "")

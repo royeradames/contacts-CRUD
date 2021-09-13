@@ -1,36 +1,34 @@
+/* libraries */
 import React, { useState } from "react"
 
-/* types */
-import { IFormInputs } from "../../pages/index"
-import {
-  UseFormRegister,
-  DeepMap,
-  FieldError,
-  UseFormSetValue,
-} from "react-hook-form"
-export type Inputs = {
-  name: string
-  class: string
-  label: string
-}[]
-export default function InputsName(props) {
-  /* catch inputs data and methods */
-  const {
-    register,
-    firstName,
-    lastName,
-    errors,
-    setValue,
-  }: {
-    register: UseFormRegister<IFormInputs>
-    firstName: string
-    lastName: string
-    errors: DeepMap<IFormInputs, FieldError>
-    setValue: UseFormSetValue<IFormInputs>
-  } = props
+// redux
+import { useSelector } from "react-redux"
+import { FormState } from "../../state/reducers/formReducer"
+
+export default function InputsName() {
+  /* redux */
+  // get state
+  const { firstName, lastName, formMethods } = useSelector(
+    ({ form }: { form: FormState }) => {
+      return {
+        firstName: form.selectedContact.firstName,
+        lastName: form.selectedContact.lastName,
+        formMethods: form.formMethods,
+      }
+    }
+  )
+
+  /* get form methods */
+  const { register, errors, setValue } = formMethods
 
   /* list the inputs */
-  const [inputs, setInputs] = useState<Inputs>([
+  const [inputs, setInputs] = useState<
+    {
+      name: string
+      class: string
+      label: string
+    }[]
+  >([
     { name: "firstName", class: "first-name", label: "First Name" },
     { name: "lastName", class: "last-name", label: "Last Name" },
   ])
