@@ -42,3 +42,21 @@ const defaultState: FormState = {
     errors: function () {},
   },
 }
+
+const reducer = (state = defaultState, action) => {
+  switch (action.type) {
+    /* toggle */
+    // form erros messages
+    case "setIsduplicate":
+      return { ...state, isDuplicate: action.payload }
+    case "setIsFailSave":
+      return { ...state, isFailSave: action.payload }
+    case "setIsFailDelete":
+      return { ...state, isFailDelete: action.payload }
+
+    default:
+      return state
+  }
+}
+
+export default reducer
