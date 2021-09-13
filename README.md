@@ -16,6 +16,11 @@
 - Gatsbyjs
 - Cypress
 
+## Extra features
+- Allow offline access
+- Allows users to add this site to their home screen on most mobile browsers
+- Loading bar when the page takes more than 1 second to load
+
 ## Author
 
 - Blog - [Medium](https://royeraadames.medium.com/)
