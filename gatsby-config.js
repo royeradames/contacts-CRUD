@@ -64,5 +64,15 @@ module.exports = {
     },
     // allow offline access
     `gatsby-plugin-offline`,
+    // add redux to gatsby
+    {
+      resolve: `gatsby-plugin-react-redux`,
+      options: {
+        // [required] - path to your createStore module
+        pathToCreateStoreModule: "./src/state/store",
+        // [optional] - if true will clean up after itself on the client, default:
+        cleanupOnClient: true,
+      },
+    },
   ],
 }
