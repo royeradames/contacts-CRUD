@@ -130,7 +130,8 @@ export default function ActionButtons() {
   /* when user saves do something. */
   const onSubmit = (data: IFormInputs) => {
     /* don't accept duplicate contacts */
-    const newContact = `${data.firstName} ${data.lastName}`.toUpperCase()
+    const newContact =
+      `${data.firstName.trim()} ${data.lastName.trim()}`.toUpperCase()
     for (let index = 0; index < contactList.length; index++) {
       const contactInList =
         `${contactList[index].firstName} ${contactList[index].lastName}`.toUpperCase()
