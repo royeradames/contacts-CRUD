@@ -112,11 +112,15 @@ export default function ActionButtons() {
         emails,
       })
       .then(data => {
+        setContactList([
+          // remove old contact information from app data
+          ...contactList.filter(contact => contact.id != id),
+          // add the update contact to the contact list
+          data.data,
+        ])
+
         // update the selected contact details
         setSelectedContact(data.data)
-
-        // add contact to the contact list
-        setContactList([...contactList, data.data])
       })
       .catch(() => {
         // show the user that there was an error while saving their data
