@@ -13,7 +13,8 @@
         cursor: pointer;
 
         // add spacing between icon and title
-        display: flex;
+        display: grid;
+        grid-auto-flow: column;
         column-gap: 2.1rem;
         align-items: center;
 
@@ -32,10 +33,10 @@
             }
         }
         &-icon{
-            justify-self: start;
             height: 3.2rem;
             width: 3.2rem;
-            z-index: 1;
+            // position:absolute;
+    // top:0;left:0;bottom:0;right:0;
         }
     }
 
