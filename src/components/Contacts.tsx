@@ -1,5 +1,5 @@
 /* libraries */
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 
 // redux
@@ -9,6 +9,8 @@ import { actionCreators } from "../state/index"
 
 /* SVGs */
 import Add from "../assets/plug-sign.svg"
+import Menu from "../assets/menu.svg"
+import CloseMenu from "../assets/close-cross.svg"
 
 /* types */
 import { FormState } from "../state/reducers/formReducer"
@@ -37,6 +39,9 @@ export default function Contacts() {
     setShowContactDetail,
     setSelectedContact,
   } = bindActionCreators(actionCreators, dispatch)
+
+  /* local state */
+  const [isMenuShowing, setIsMenuShowing] = useState(false)
 
   /* get the list of names when page first loads */
   useEffect(() => {
@@ -131,16 +136,37 @@ export default function Contacts() {
     setShowContactDetail(true)
   }
   return (
-    <article className="contacts">
+    <>
+      <Menu
+        className={`contacts__menu ${
+          isMenuShowing ? "contacts__menu-hide" : ""
+        }`}
+        onClick={() => setIsMenuShowing(!isMenuShowing)}
+      />
+
       <article
-        className="contacts__add"
-        /* innit form to create new contact */
-        onClick={innitNewContact}
+        className={`contacts ${isMenuShowing ? "contacts__menu-show" : ""}`}
       >
-        <h1 className="contacts__add-title">Contacts</h1>
-        <Add className="contacts__add-icon" />
+        <article
+          className={`contacts__menu-close ${
+            isMenuShowing ? "contacts__menu-show" : ""
+          }`}
+        >
+          <CloseMenu
+            className="contacts__menu-close-icon"
+            onClick={() => setIsMenuShowing(!isMenuShowing)}
+          />
+        </article>
+        <article
+          className="contacts__add"
+          /* innit form to create new contact */
+          onClick={innitNewContact}
+        >
+          <h1 className="contacts__add-title">Contacts</h1>
+          <Add className="contacts__add-icon" />
+        </article>
+        <article>{listContacts(contactList)}</article>
       </article>
-      <article>{listContacts(contactList)}</article>
-    </article>
+    </>
   )
 }
