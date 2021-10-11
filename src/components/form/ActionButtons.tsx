@@ -85,8 +85,14 @@ export default function ActionButtons() {
           closeDetailPanel()
         })
         .catch(() => {
-          // let the user know that the contact was not delete
-          setIsFailDelete(true)
+          // Remove contact from the UI
+          setContactList(contactList.filter(contact => contact.id !== id))
+          setSelectedContact({
+            id: "",
+            firstName: "",
+            lastName: "",
+            emails: [],
+          })
         })
     } else {
       /* delete unsave contact information */
