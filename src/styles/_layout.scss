@@ -1,7 +1,18 @@
+$small: 560px;
+
 .layout{
     // add list and form side by side
     display: grid;
     grid-template: 
         "list detail" 100vh/min-content 1fr
     ;
+
+    @media(max-width: $small){
+        // menu
+        // form 
+        grid-template: 
+            min-content 
+            1fr
+            /1fr;
+    }
 }
