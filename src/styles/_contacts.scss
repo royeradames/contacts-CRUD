@@ -1,3 +1,5 @@
+$small: 560px;
+
 .contacts{
     // add scolling bar if there is more contact that available view port
     overflow: auto;
@@ -8,6 +10,58 @@
     // set width to max text content
     display: inline-block;
 
+    @media(max-width: $small){
+        display: none;
+    }
+
+    &__menu{
+        // hide the menu on big screen
+        display: none;
+        @media(max-width: $small){
+            // showthe menu on big screen
+            display: initial;
+            width: 3.2rem;
+            z-index: 1;
+            margin: 2.7rem 3rem 3.5rem;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+            &-show{
+                @media(max-width:$small){
+                    // hover the contact list above the form
+                    display: initial;
+                    position: absolute;
+                }
+            }
+            &-hide{
+                z-index: -1;
+            }
+            &-close{
+                // hide the close wrapper 
+                display: none;
+                @media(max-width:$small){
+                    // center and show the close icon
+                    display: grid;
+                    height: 4rem;
+                    justify-items: center;
+                    width: 100%;
+                    position: initial;
+                }
+                &-icon{
+                    @media(max-width: $small){
+                        /* X icon to close the menu */
+                        // show that you can click on it when the mouse is hovering on it
+                        cursor: pointer;
+                        // show the icon
+                        display: initial;
+                        // set size small
+                        width: 2rem;
+                    }
+                }
+            }
+
+    }
     &__add{
         // let user know that they can click on add
         cursor: pointer;
@@ -35,8 +89,6 @@
         &-icon{
             height: 3.2rem;
             width: 3.2rem;
-            // position:absolute;
-    // top:0;left:0;bottom:0;right:0;
         }
     }
 

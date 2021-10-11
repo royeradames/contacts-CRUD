@@ -1,8 +1,11 @@
 $form: 835px;
-
+$small: 560px;
 .form{
     /* move form to the right of contact name list */
     grid-area: detail;
+    @media(max-width: $small){
+        grid-area: initial;
+    }
     
     /* layout */
     display: grid;
@@ -59,6 +62,11 @@ $form: 835px;
     
     /* add white space around */
     padding: 7.7rem 3rem 2.2rem;
+    @media(max-width: $small){
+        // white space is hadle by the layout
+        padding: 0rem 3rem 2.2rem;
+
+    }
 
     /* define text for labels */
     &__input{
